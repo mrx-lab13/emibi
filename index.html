@@ -214,6 +214,31 @@
   }
   .btn-reserve:hover { background: var(--crimson-light); gap: 18px; }
 
+  .hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.3s, opacity 0.3s;
+    flex-shrink: 0;
+  }
+  .btn-instagram:hover { transform: scale(1.1); opacity: 0.85; }
+  .btn-instagram img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   /* ── SECTION COMMON ── */
   .section-label {
     font-family: 'Cormorant Garamond', serif;
@@ -606,7 +631,12 @@
     <p class="hero-logo-en">E &nbsp;M &nbsp;I &nbsp;B &nbsp;I</p>
     <h2 class="hero-catch">尾道の夜に、<br>鉄板と肉の香りを。</h2>
     <p class="hero-sub">鉄板で焼き上げる肉の旨みと、<br>心地よい時間をお楽しみください。</p>
-    <a href="#reserve" class="btn-reserve">ご予約はこちら &nbsp;→</a>
+    <div class="hero-buttons">
+      <a href="https://tabelog.com/hiroshima/A3406/A340302/34024588/" target="_blank" class="btn-reserve">ご予約はこちら &nbsp;→</a>
+      <a href="https://www.instagram.com/emibi29?igsh=eDJhZWJmMHI2NTh4" target="_blank" class="btn-instagram">
+        <img src="instagram.jpg" alt="Instagram">
+      </a>
+    </div>
   </div>
 </section>
 
