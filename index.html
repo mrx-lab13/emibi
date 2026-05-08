@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>尾道 肉鉄板 笑みび | ONOMICHI NIKU TEPPAN EMIBI</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --crimson: #8B1A1A;
+    --crimson-light: #A52020;
+    --gold: #C9A96E;
+    --dark: #0D0B09;
+    --dark2: #111009;
+    --dark3: #1A1612;
+    --charcoal: #2A2420;
+    --warm-white: #F5EDD8;
+    --cream: #EAD9B8;
+    --text-muted: #8A7B68;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--dark);
+    color: var(--warm-white);
+    font-family: 'Noto Serif JP', serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 18px 40px;
+    background: linear-gradient(to bottom, rgba(13,11,9,0.92) 0%, transparent 100%);
+    gap: 28px;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  nav a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--gold); }
+  .nav-reserve {
+    background: var(--crimson) !important;
+    color: #fff !important;
+    padding: 10px 22px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    transition: background 0.3s !important;
+  }
+  .nav-reserve:hover { background: var(--crimson-light) !important; }
+
+  /* hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--cream);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* mobile menu drawer */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(13,11,9,0.97);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    letter-spacing: 0.2em;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .m-reserve {
+    margin-top: 12px;
+    background: var(--crimson);
+    color: #fff !important;
+    padding: 16px 48px;
+    font-size: 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    min-height: 600px;
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.65);
+    transform: scale(1.04);
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.04); }
+    to   { transform: scale(1.00); }
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(13,11,9,0.80) 0%,
+      rgba(13,11,9,0.28) 60%,
+      rgba(13,11,9,0.08) 100%
+    );
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 68px;
+    animation: fadeUp 1.2s 0.3s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .hero-logo-jp {
+    font-size: clamp(48px, 8vw, 90px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 10px;
+    font-family: 'Shippori Mincho', serif;
+  }
+  .hero-logo-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+  .hero-catch {
+    font-size: clamp(24px, 4.5vw, 48px);
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 18px;
+    font-family: 'Shippori Mincho', serif;
+  }
+  .hero-sub {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.1;
+    color: var(--cream);
+    opacity: 0.85;
+    margin-bottom: 40px;
+    letter-spacing: 0.08em;
+  }
+  .btn-reserve {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--crimson);
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 36px;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    transition: background 0.3s, gap 0.3s;
+    width: fit-content;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .btn-reserve:hover { background: var(--crimson-light); gap: 18px; }
+
+  /* ── SECTION COMMON ── */
+  .section-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.38em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .section-title-jp {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: #fff;
+    margin-bottom: 26px;
+    line-height: 1.4;
+  }
+  .gold-bar {
+    width: 42px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 28px;
+  }
+  .about-catch {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(16px, 2.2vw, 23px);
+    font-weight: 400;
+    line-height: 1.9;
+    letter-spacing: 0.07em;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+  .body-text {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.3;
+    color: var(--text-muted);
+    letter-spacing: 0.07em;
+  }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    padding: 13px 28px;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    transition: background 0.3s, color 0.3s;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--dark); }
+
+  /* ── ABOUT ── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .about-img {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.82);
+  }
+  .about-text {
+    background: var(--dark3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 75px 65px;
+  }
+
+  /* ── MENU ── */
+  .menu {
+    background: var(--dark2);
+    padding: 90px 65px;
+  }
+  .menu-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    gap: 24px;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+  .menu-item { overflow: hidden; }
+  .menu-item-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.88);
+    transition: filter 0.4s, transform 0.5s;
+  }
+  .menu-item:hover .menu-item-photo { filter: brightness(1.05); transform: scale(1.03); }
+  .menu-item-info { padding: 20px 2px 0; }
+  .menu-item-name {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    margin-bottom: 9px;
+  }
+  .menu-item-desc {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text-muted);
+    letter-spacing: 0.07em;
+  }
+
+  /* ── DRINKS ── */
+  .drinks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .drinks-img {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.78);
+  }
+  .drinks-text {
+    background: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 75px 65px;
+  }
+  .drinks-body {
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.2;
+    color: var(--text-muted);
+    letter-spacing: 0.07em;
+    margin-bottom: 40px;
+  }
+  .drinks-table { border-top: 1px solid rgba(201,169,110,0.2); }
+  .drink-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+  .drink-cat {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+  }
+  .drink-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  /* ── INFO ── */
+  .info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: var(--dark3);
+  }
+  .info-map { overflow: hidden; }
+  .info-map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    display: block;
+    border: none;
+    filter: grayscale(0.35) brightness(0.82);
+  }
+  .info-detail {
+    padding: 65px 50px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .info-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .info-rows { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+  .info-row {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    line-height: 1.9;
+  }
+  .info-key { color: var(--gold); }
+  .info-val { color: var(--text-muted); }
+  .info-sns { padding: 65px 50px; }
+  .sns-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+  .sns-sub {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    line-height: 2.1;
+    margin-bottom: 28px;
+  }
+  .btn-sns {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 12px 26px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    transition: border-color 0.3s, color 0.3s;
+    font-family: 'Noto Serif JP', serif;
+  }
+  .btn-sns:hover { border-color: var(--gold); color: var(--gold); }
+  .sns-img-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    margin-top: 26px;
+  }
+  .sns-img-grid img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    filter: brightness(0.78);
+    transition: filter 0.3s;
+  }
+  .sns-img-grid img:hover { filter: brightness(1); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark2);
+    border-top: 1px solid rgba(201,169,110,0.15);
+    padding: 26px 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+  }
+  .footer-copy {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ════════════════════════════════
+     RESPONSIVE — スマホ対応
+  ════════════════════════════════ */
+
+  @media (max-width: 768px) {
+
+    /* NAV */
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    /* HERO */
+    .hero-content { padding: 0 28px; }
+    .hero-logo-jp { font-size: clamp(44px, 12vw, 64px); }
+    .hero-logo-en { font-size: 12px; letter-spacing: 0.25em; margin-bottom: 28px; }
+    .hero-catch { font-size: clamp(22px, 7vw, 34px); margin-bottom: 14px; }
+    .hero-sub { font-size: 12px; margin-bottom: 30px; }
+    .btn-reserve { padding: 14px 28px; font-size: 13px; }
+
+    /* ABOUT */
+    .about { grid-template-columns: 1fr; }
+    .about-img { min-height: 280px; height: 280px; }
+    .about-text { padding: 52px 28px; }
+
+    /* MENU */
+    .menu { padding: 60px 24px; }
+    .menu-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    .menu-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .menu-item-photo { aspect-ratio: 3/2; }
+
+    /* DRINKS */
+    .drinks { grid-template-columns: 1fr; }
+    .drinks-img { min-height: 260px; height: 260px; }
+    .drinks-text { padding: 52px 28px; }
+
+    /* INFO */
+    .info { grid-template-columns: 1fr; }
+    .info-map iframe { min-height: 240px; }
+    .info-detail {
+      padding: 48px 28px;
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .info-sns { padding: 48px 28px; }
+
+    /* FOOTER */
+    footer {
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px 28px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-content { padding: 0 22px; }
+    .about-text { padding: 44px 22px; }
+    .menu { padding: 52px 20px; }
+    .drinks-text { padding: 44px 22px; }
+    .info-detail, .info-sns { padding: 40px 22px; }
+    footer { padding: 22px 20px; }
+    .section-title-jp { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-links">
+    <a href="#about">笑みびとは</a>
+    <a href="#menu">お料理</a>
+    <a href="#drinks">お飲み物</a>
+    <a href="#info">店舗情報</a>
+    <a href="#reserve" class="nav-reserve">ご予約</a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">笑みびとは</a>
+  <a href="#menu" onclick="closeMenu()">お料理</a>
+  <a href="#drinks" onclick="closeMenu()">お飲み物</a>
+  <a href="#info" onclick="closeMenu()">店舗情報</a>
+  <a href="#reserve" class="m-reserve" onclick="closeMenu()">ご予約はこちら</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <img class="hero-img" src="exterior.png" alt="笑みび 外観">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-label">ONOMICHI NIKU TEPPAN</p>
+    <h1 class="hero-logo-jp">笑みび</h1>
+    <p class="hero-logo-en">E &nbsp;M &nbsp;I &nbsp;B &nbsp;I</p>
+    <h2 class="hero-catch">尾道の夜に、<br>鉄板と肉の香りを。</h2>
+    <p class="hero-sub">鉄板で焼き上げる肉の旨みと、<br>心地よい時間をお楽しみください。</p>
+    <a href="#reserve" class="btn-reserve">ご予約はこちら &nbsp;→</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <img class="about-img" src="interior.png" alt="店内空間">
+  <div class="about-text reveal">
+    <p class="section-label">About Emibi</p>
+    <h2 class="section-title-jp">笑みびとは</h2>
+    <div class="gold-bar"></div>
+    <p class="about-catch">気取らず、でも特別。<br>鉄板を囲むその時間が、<br>今日の思い出になりますように。</p>
+    <p class="body-text">厳選したお肉を、最高の焼き加減で。<br>一人でも、二人でも。<br>大切な人と過ごす夜に寄り添うお店でありたい。<br>それが、笑みびの想いです。</p>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="menu-header reveal">
+    <div>
+      <p class="section-label">Signature Dishes</p>
+      <h2 class="section-title-jp">名物料理</h2>
+      <div class="gold-bar"></div>
+      <p class="body-text" style="max-width:300px;">鉄板で引き出す、素材の力。<br>ここでしか味わえない一皿を。</p>
+    </div>
+    <a href="#" class="btn-outline">お品書きはこちら &nbsp;→</a>
+  </div>
+  <div class="menu-grid reveal">
+    <div class="menu-item">
+      <img class="menu-item-photo" src="food.png" alt="特選サーロイン" style="object-position:16% center;">
+      <div class="menu-item-info">
+        <p class="menu-item-name">特選サーロイン</p>
+        <p class="menu-item-desc">鉄板で一気に焼き上げる<br>旨みあふれる一品。</p>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img class="menu-item-photo" src="food.png" alt="牛ホルモンの味噌だれ焼き" style="object-position:50% center;">
+      <div class="menu-item-info">
+        <p class="menu-item-name">牛ホルモンの味噌だれ焼き</p>
+        <p class="menu-item-desc">特製味噌だれの香りが<br>食欲をそそります。</p>
+      </div>
+    </div>
+    <div class="menu-item">
+      <img class="menu-item-photo" src="food.png" alt="黒毛和牛の肉盛り" style="object-position:84% center;">
+      <div class="menu-item-info">
+        <p class="menu-item-name">黒毛和牛の肉盛り</p>
+        <p class="menu-item-desc">その日のおすすめ部位を<br>贅沢に盛り合わせで。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section class="drinks" id="drinks">
+  <img class="drinks-img" src="drinks.png" alt="お酒棚">
+  <div class="drinks-text reveal">
+    <p class="section-label">Drinks</p>
+    <h2 class="section-title-jp">お飲み物</h2>
+    <div class="gold-bar"></div>
+    <p class="drinks-body">肉の旨みを引き立てる<br>お酒を豊富にご用意。<br><br>全国の厳選した日本酒や焼酎、<br>自家製サワーやワインも<br>お好みの一杯を見つけてください。</p>
+    <div class="drinks-table">
+      <div class="drink-row"><span class="drink-cat">日本酒</span><span class="drink-desc">各種取り揃えております</span></div>
+      <div class="drink-row"><span class="drink-cat">焼酎</span><span class="drink-desc">芋・麦・米をご用意</span></div>
+      <div class="drink-row"><span class="drink-cat">サワー</span><span class="drink-desc">自家製サワーも人気です</span></div>
+      <div class="drink-row"><span class="drink-cat">ワイン</span><span class="drink-desc">肉料理に合うワインを厳選</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section class="info" id="info">
+  <div class="info-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.1!2d133.2021!3d34.4057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z5bSO6YGT5biC5LmF5L-u55S6!5e0!3m2!1sja!2sjp!4v1000"
+      allowfullscreen loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="笑みび 地図">
+    </iframe>
+  </div>
+  <div class="info-detail reveal">
+    <h3 class="info-title">店舗情報</h3>
+    <div class="info-rows">
+      <div class="info-row"><span class="info-key">住所</span><span class="info-val">〒722-0045<br>広島県尾道市久保2-18-9</span></div>
+      <div class="info-row"><span class="info-key">TEL</span><span class="info-val">0848-88-9108</span></div>
+      <div class="info-row"><span class="info-key">営業時間</span><span class="info-val">17:30〜23:00<br>（L.O.22:00）</span></div>
+      <div class="info-row"><span class="info-key">定休日</span><span class="info-val">不定休</span></div>
+    </div>
+    <a href="#" class="btn-outline">詳しく見る &nbsp;→</a>
+  </div>
+  <div class="info-sns reveal">
+    <h3 class="sns-title">Instagram</h3>
+    <p class="sns-sub">最新情報やお料理のご紹介を<br>随時更新中。</p>
+    <a href="https://instagram.com/emibi29" target="_blank" class="btn-sns">⊕ &nbsp;@emibi29 をフォロー</a>
+    <div class="sns-img-grid">
+      <img src="interior.png" alt="instagram 1">
+      <img src="exterior.png" alt="instagram 2">
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">尾道 肉鉄板 笑みび</span>
+  <span class="footer-copy">© 2024 ONOMICHI NIKU TEPPAN EMIBI. All Rights Reserved.</span>
+</footer>
+
+<script>
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // hamburger menu
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+    document.body.style.overflow =
+      document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
